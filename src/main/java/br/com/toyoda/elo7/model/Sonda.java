@@ -63,5 +63,11 @@ public class Sonda {
 	public Direction getDirection() {
 		return direction;
 	}
+
+	@Override
+	public String toString() {
+		return "A sonda " + identificacao + " estava inicialmente localizada em " + coordinateX + "," + coordinateY
+				+ " na direcao " + direction.name();
+	}
 	
 }

@@ -1,7 +1,5 @@
 package br.com.toyoda.elo7.search;
 
-import java.util.Random;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,15 +14,21 @@ import br.com.toyoda.elo7.direction.Direction;
 public class SondaSearchTest {
 
 	@Autowired
-	private SondaSolrRepository sondaSolrRepository;
+	private SondaIndexer sondaIndexer;
 	
 	@Test
-	public void executeComandsTest() {
-	    Long id = new Random().nextLong();
+	public void mustIndexerDocumentSonda() throws SearchException {
+		String[] orientation = {"L","M","L","M","L","M","L","M","M"};
+		SondaSearch sonda = new SondaSearch("Marte", "Sonda01", "A Sonda01 estava inicialmente localizada em 1,2 na direcao North", orientation);
+		boolean indexerSonda = sondaIndexer.indexerSonda(sonda, 1, 3, Direction.NORTH.name());
+		Assert.assertTrue(indexerSonda);		
+	}
 	
-		SondaSearch sonda = new SondaSearch(id, 3, 5, Direction.NORTH.name());
-		sondaSolrRepository.save(sonda);
-		Assert.assertEquals(3, 3);
-		
+	@Test(expected = SearchException.class)
+	public void mustThrowErrorFieldRequiredNullIndexerSonda() throws SearchException {
+		String[] orientation = {"L","M","L","M","L","M","L","M","M"};
+		SondaSearch sonda = new SondaSearch("Marte", "Sonda01", "A Sonda01 estava inicialmente localizada em 1,2 na direcao North", orientation);
+		boolean indexerSonda = sondaIndexer.indexerSonda(sonda, null, null, null);
+		Assert.assertFalse(indexerSonda);
 	}
 }
