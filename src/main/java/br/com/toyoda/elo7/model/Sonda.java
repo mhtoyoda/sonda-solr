@@ -3,12 +3,14 @@ package br.com.toyoda.elo7.model;
 import br.com.toyoda.elo7.direction.Direction;
 
 public class Sonda {
-
+	
+	private String identificacao;
 	private int coordinateX;
 	private int coordinateY;
 	private Direction direction;
 
-	public Sonda(int coordinateX, int coordinateY, Direction direction) {
+	public Sonda(String identificacao, int coordinateX, int coordinateY, Direction direction) {
+		this.identificacao = identificacao;
 		this.coordinateX = coordinateX;
 		this.coordinateY = coordinateY;
 		this.direction = direction;
@@ -45,7 +47,11 @@ public class Sonda {
 		this.direction.getOrientation().moviment(planalto, this);
 		return this;
 	}
-
+	
+	public String getIdentificacao() {
+		return identificacao;
+	}
+	
 	public int getCoordinateX() {
 		return coordinateX;
 	}

@@ -12,7 +12,7 @@ public class SondaTest {
 
 	@Test
 	public void updateSondaTest() {
-		Sonda sonda = new Sonda(1, 2, Direction.NORTH);
+		Sonda sonda = new Sonda("sonda01", 1, 2, Direction.NORTH);
 		sonda.updateCoordinateX(2).updateCoordinateY(3).updateDirection(Direction.SOUTH);
 		Assert.assertEquals(2, sonda.getCoordinateX());
 		Assert.assertEquals(3, sonda.getCoordinateY());
@@ -21,21 +21,21 @@ public class SondaTest {
 	
 	@Test
 	public void moveSondaLeftTest() {
-		Sonda sonda = new Sonda(1, 2, Direction.NORTH);
+		Sonda sonda = new Sonda("sonda01", 1, 2, Direction.NORTH);
 		sonda.moveLeft();
 		Assert.assertEquals(Direction.WEST, sonda.getDirection());
 	}
 	
 	@Test
 	public void moveSondaRightTest() {
-		Sonda sonda = new Sonda(1, 2, Direction.NORTH);
+		Sonda sonda = new Sonda("sonda01", 1, 2, Direction.NORTH);
 		sonda.moveRight();
 		Assert.assertEquals(Direction.EAST, sonda.getDirection());
 	}
 	
 	@Test
 	public void moveSondaTest() {
-		Sonda sonda = new Sonda(1, 2, Direction.NORTH);
+		Sonda sonda = new Sonda("sonda01", 1, 2, Direction.NORTH);
 		Planalto planalto = new Planalto(5, 5);
 		sonda.moveOn(planalto);
 		Assert.assertEquals(1, sonda.getCoordinateX());

@@ -22,8 +22,8 @@ public class SondaActionTest {
 	@Test
 	public void executeComandsTest() {
 		Planalto marte = new Planalto(5, 5);
-		Sonda sondaA = new Sonda(1, 2, Direction.NORTH);
-		Sonda sondaB = new Sonda(3, 3, Direction.EAST);
+		Sonda sondaA = new Sonda("sondaA", 1, 2, Direction.NORTH);
+		Sonda sondaB = new Sonda("sondaB", 3, 3, Direction.EAST);
 		
 		String comandToSondaA = "LMLMLMLMM";
 		String comandToSondaB = "MMRMMRMRRM";
