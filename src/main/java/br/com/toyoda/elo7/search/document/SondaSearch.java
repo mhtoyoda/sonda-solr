@@ -1,4 +1,4 @@
-package br.com.toyoda.elo7.search;
+package br.com.toyoda.elo7.search.document;
 
 import java.io.Serializable;
 import java.util.Date;

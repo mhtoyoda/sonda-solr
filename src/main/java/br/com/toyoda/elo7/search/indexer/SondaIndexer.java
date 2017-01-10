@@ -1,7 +1,11 @@
-package br.com.toyoda.elo7.search;
+package br.com.toyoda.elo7.search.indexer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import br.com.toyoda.elo7.search.document.SondaSearch;
+import br.com.toyoda.elo7.search.exception.SearchException;
+import br.com.toyoda.elo7.search.repository.SondaSolrRepository;
 
 @Component
 public class SondaIndexer {

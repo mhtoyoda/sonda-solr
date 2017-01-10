@@ -1,4 +1,4 @@
-package br.com.toyoda.elo7.search;
+package br.com.toyoda.elo7.search.exception;
 
 public class SearchException extends Exception {
 

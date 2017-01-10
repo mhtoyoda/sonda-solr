@@ -8,6 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.toyoda.elo7.direction.Direction;
+import br.com.toyoda.elo7.search.document.SondaSearch;
+import br.com.toyoda.elo7.search.exception.SearchException;
+import br.com.toyoda.elo7.search.indexer.SondaIndexer;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
