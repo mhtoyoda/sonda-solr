@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="author" content="Marcelo Toyoda" />
+	
+    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+	<title>Sonda - Toyoda</title>
+</head>
+<body>
+	<div class="container">
+		<h1>Sonda WEB</h1>
+		<form id="sondaForm" action="#" method="post">
+			<div class="form-group row">
+				<fieldset class="form-group">
+					<legend>Planalto</legend>
+					<div class="col-sm-4">
+						<select class="form-control" name="planalto">
+							<option th:each="planalto: ${planaltos}" th:value="${planalto}" th:text="${planalto}"></option>
+						</select>						 
+					</div>
+					<div class="col-sm-4">
+						<input class="form-control" type="number"							
+							placeholder="Digite Coordenada Limite X do Planalto"
+							name="coordinatePlanaltoX" style="text-transform: uppercase;"
+							min="0" max="10" required="true"></input>  
+					</div> 
+					<div class="col-sm-4">
+						<input class="form-control" type="number"							
+							placeholder="Digite Coordenada Limite Y do Planalto"
+							name="coordinatePlanaltoY" style="text-transform: uppercase;"
+							min="0" max="10" required="true"></input>
+					</div>					  
+				</fieldset>
+			</div>
+			<div class="form-group row">
+				<fieldset class="form-group">
+					<legend>Sonda 1</legend>
+					<div class="col-sm-2">
+						<input class="form-control" type="text"							
+							placeholder="Identificação"
+							name="identificacao" style="text-transform: uppercase;" onkeypress="return validateIdentificacao(event);"
+							required="true"></input> 
+					</div>
+					<div class="col-sm-3">
+						<input class="form-control" type="number"							
+							placeholder="Digite Coordenada X Inicial da Sonda"
+							name="coordinateX" style="text-transform: uppercase;"
+							min="0" max="10" required="true"></input>  
+					</div> 
+					<div class="col-sm-3">
+						<input class="form-control" type="number"							
+							placeholder="Digite Coordenada Y Inicial da Sonda"
+							name="coordinateY" style="text-transform: uppercase;"
+							min="0" max="10" required="true"></input>
+					</div>
+					<div class="col-sm-1">
+						<select class="form-control" name="direction">
+							<option value="N">N</option>
+							<option value="S">S</option>
+							<option value="W">W</option>
+							<option value="E">E</option>
+						</select>
+					</div>
+					<div class="col-sm-3">
+						<input class="form-control instructions" type="text"							
+							placeholder="Digite Instruções (L,R,M)"
+							name="instructions"
+							required="true" style="text-transform: uppercase;" onkeypress="return validateInstructions(event);"></input> 
+					</div>  
+				</fieldset>
+			</div>
+			<div class="form-group row">
+				<fieldset class="form-group">
+					<legend>Sonda 2</legend>
+					<div class="col-sm-2">
+						<input class="form-control" type="text"							
+							placeholder="Identificação"
+							name="identificacao" style="text-transform: uppercase;" onkeypress="return validateIdentificacao(event);"
+							required="true"></input> 
+					</div>
+					<div class="col-sm-3">
+						<input class="form-control" type="number"							
+							placeholder="Digite Coordenada X Inicial da Sonda"
+							name="coordinateX" style="text-transform: uppercase;"
+							min="0" max="10" required="true"></input> 
+					</div> 
+					<div class="col-sm-3">
+						<input class="form-control" type="number"							
+							placeholder="Digite Coordenada Y Inicial da Sonda"
+							name="coordinateY" style="text-transform: uppercase;"
+							min="0" max="10" required="true"></input>
+					</div>
+					<div class="col-sm-1">
+						<select class="form-control" name="direction">
+							<option value="N">N</option>
+							<option value="S">S</option>
+							<option value="W">W</option>
+							<option value="E">E</option>
+						</select>
+					</div>
+					<div class="col-sm-3">
+						<input class="form-control instructions" type="text"							
+							placeholder="Digite Instruções (L,R,M)"
+							name="instructions2" style="text-transform: uppercase;" onkeypress="return validateInstructions(event);"
+							required="true"></input> 
+					</div>  
+				</fieldset>
+			</div>	
+			<div>
+      			<button id="sendInstruction" type="button" class="btn btn-primary btn-block">Enviar Instruções</button>
+			</div>
+		</form>
+	</div>	
+	<script src="http://code.jquery.com/jquery.js"></script>
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/functions.js"></script>
+</body>
+</html>
