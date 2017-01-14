@@ -36,7 +36,7 @@ public class SondaTest {
 	@Test
 	public void moveSondaTest() {
 		Sonda sonda = new Sonda("sonda01", 1, 2, Direction.NORTH);
-		Planalto planalto = new Planalto(5, 5);
+		Planalto planalto = new Planalto("Marte", 5, 5);
 		sonda.moveOn(planalto);
 		Assert.assertEquals(1, sonda.getCoordinateX());
 		Assert.assertEquals(3, sonda.getCoordinateY());

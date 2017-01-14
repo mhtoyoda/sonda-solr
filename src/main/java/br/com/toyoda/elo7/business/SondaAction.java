@@ -22,7 +22,7 @@ public class SondaAction {
 	
 	public Sonda executeComands(Planalto planalto, Sonda sonda, String comand){		
 		String comands = StringUtils.trimAllWhitespace(comand).toUpperCase();
-		SondaSearch sondaSearch = new SondaSearch("Marte", sonda.getIdentificacao(), sonda.toString(), StringUtils.split(comands, ""));
+		SondaSearch sondaSearch = new SondaSearch(planalto.getNome(), sonda.getIdentificacao(), sonda.toString(), StringUtils.split(comands, ""));
 		for(int index = 0; index < comands.length(); index++){
 			String instruction = String.valueOf(comands.charAt(index));
 			sonda = move(planalto, sonda, instruction);

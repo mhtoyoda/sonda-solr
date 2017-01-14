@@ -21,7 +21,7 @@ public class SondaActionTest {
 	
 	@Test
 	public void executeComandsTest() {
-		Planalto marte = new Planalto(5, 5);
+		Planalto marte = new Planalto("Marte", 5, 5);
 		Sonda sondaA = new Sonda("sondaA", 1, 2, Direction.NORTH);
 		Sonda sondaB = new Sonda("sondaB", 3, 3, Direction.EAST);
 		

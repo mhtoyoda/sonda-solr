@@ -1,19 +1,24 @@
 package br.com.toyoda.elo7.model;
 
 public class Planalto {
-
+	
+	private String nome;
 	private int coordenadaMinimoX;
 	private int coordenadaMinimoY;
 	private int coordenadaLimitX;
 	private int coordenadaLimitY;
 
-	public Planalto(int coordenadaLimitX, int coordenadaLimitY) {
+	public Planalto(String nome, int coordenadaLimitX, int coordenadaLimitY) {
 		this.coordenadaMinimoX = 0;
 		this.coordenadaLimitX = coordenadaLimitX;
 		this.coordenadaMinimoY = 0;
 		this.coordenadaLimitY = coordenadaLimitY;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+	
 	public int getCoordenadaMinimoX() {
 		return coordenadaMinimoX;
 	}
