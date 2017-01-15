@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import br.com.toyoda.elo7.direction.Direction;
 import br.com.toyoda.elo7.model.Planalto;
 import br.com.toyoda.elo7.model.Sonda;
+import br.com.toyoda.elo7.search.exception.SearchException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -20,7 +21,7 @@ public class SondaActionTest {
 	private SondaAction sondaAction;
 	
 	@Test
-	public void executeComandsTest() {
+	public void executeComandsTest() throws SearchException {
 		Planalto marte = new Planalto("Marte", 5, 5);
 		Sonda sondaA = new Sonda("sondaA", 1, 2, Direction.NORTH);
 		Sonda sondaB = new Sonda("sondaB", 3, 3, Direction.EAST);

@@ -8,7 +8,7 @@ public class Sonda {
 	private int coordinateX;
 	private int coordinateY;
 	private Direction direction;
-
+	
 	public Sonda(String identificacao, int coordinateX, int coordinateY, Direction direction) {
 		this.identificacao = identificacao;
 		this.coordinateX = coordinateX;

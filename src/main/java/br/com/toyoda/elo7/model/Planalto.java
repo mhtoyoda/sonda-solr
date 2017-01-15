@@ -9,6 +9,7 @@ public class Planalto {
 	private int coordenadaLimitY;
 
 	public Planalto(String nome, int coordenadaLimitX, int coordenadaLimitY) {
+		this.nome = nome;
 		this.coordenadaMinimoX = 0;
 		this.coordenadaLimitX = coordenadaLimitX;
 		this.coordenadaMinimoY = 0;

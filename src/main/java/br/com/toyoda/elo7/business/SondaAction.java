@@ -20,9 +20,9 @@ public class SondaAction {
 	@Autowired
 	private SondaIndexer sondaIndexer;
 	
-	public Sonda executeComands(Planalto planalto, Sonda sonda, String comand){		
+	public Sonda executeComands(Planalto planalto, Sonda sonda, String comand) throws SearchException{		
 		String comands = StringUtils.trimAllWhitespace(comand).toUpperCase();
-		SondaSearch sondaSearch = new SondaSearch(planalto.getNome(), sonda.getIdentificacao(), sonda.toString(), StringUtils.split(comands, ""));
+		SondaSearch sondaSearch = new SondaSearch(planalto.getNome(), sonda.getIdentificacao(), sonda.toString(), comands.split(""));
 		for(int index = 0; index < comands.length(); index++){
 			String instruction = String.valueOf(comands.charAt(index));
 			sonda = move(planalto, sonda, instruction);
@@ -45,11 +45,12 @@ public class SondaAction {
 		return sonda;
 	}
 	
-	private void indexaSonda(SondaSearch sondaSearch, Integer coordinateX, Integer coordinateY, String direction){
+	private void indexaSonda(SondaSearch sondaSearch, Integer coordinateX, Integer coordinateY, String direction) throws SearchException{
 		try {
 			sondaIndexer.indexerSonda(sondaSearch, coordinateX, coordinateY, direction);
 		} catch (SearchException e) {
-			log.error("Erro ao indexar dados de sonda "+e.getMessage());			
+			log.error("Erro ao indexar dados de sonda "+e.getMessage());
+			throw e;
 		}
 	}
 }
