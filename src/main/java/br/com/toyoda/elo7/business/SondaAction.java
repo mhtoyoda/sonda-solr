@@ -1,5 +1,7 @@
 package br.com.toyoda.elo7.business;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,13 @@ public class SondaAction {
 	
 	public Sonda executeComands(Planalto planalto, Sonda sonda, String comand) throws SearchException{		
 		String comands = StringUtils.trimAllWhitespace(comand).toUpperCase();
-		SondaSearch sondaSearch = new SondaSearch(planalto.getNome(), sonda.getIdentificacao(), sonda.toString(), comands.split(""));
+		String currentPosition = sonda.toString();
 		for(int index = 0; index < comands.length(); index++){
 			String instruction = String.valueOf(comands.charAt(index));
 			sonda = move(planalto, sonda, instruction);
 		}
-		
-		indexaSonda(sondaSearch, sonda.getCoordinateX(), sonda.getCoordinateY(), sonda.getDirection().name());
+		SondaSearch sondaSearch = new SondaSearch(planalto.getNome(), sonda, currentPosition, comands.split(""));
+		indexaSonda(sondaSearch);
 		
 		return sonda;
 	}
@@ -45,9 +47,18 @@ public class SondaAction {
 		return sonda;
 	}
 	
-	private void indexaSonda(SondaSearch sondaSearch, Integer coordinateX, Integer coordinateY, String direction) throws SearchException{
+	private void indexaSonda(SondaSearch sondaSearch) throws SearchException{
 		try {
-			sondaIndexer.indexerSonda(sondaSearch, coordinateX, coordinateY, direction);
+			sondaIndexer.indexerSonda(sondaSearch);
+		} catch (SearchException e) {
+			log.error("Erro ao indexar dados de sonda "+e.getMessage());
+			throw e;
+		}
+	}
+	
+	protected void indexaSondaList(List<SondaSearch> list) throws SearchException{
+		try {
+			sondaIndexer.indexaFullList(list);
 		} catch (SearchException e) {
 			log.error("Erro ao indexar dados de sonda "+e.getMessage());
 			throw e;

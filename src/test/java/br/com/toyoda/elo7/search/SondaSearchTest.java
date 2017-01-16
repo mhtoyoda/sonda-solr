@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.toyoda.elo7.direction.Direction;
+import br.com.toyoda.elo7.model.Sonda;
 import br.com.toyoda.elo7.search.document.SondaSearch;
 import br.com.toyoda.elo7.search.document.SondaSearchResult;
 import br.com.toyoda.elo7.search.exception.SearchException;
@@ -29,23 +30,26 @@ public class SondaSearchTest {
 	@Before
 	public void initBefore() throws SearchException{
 		String[] orientation = {"L","M","L","M","L","M","L","M","M"};
-		SondaSearch sonda = new SondaSearch("Marte", "Sonda01", "A Sonda01 estava inicialmente localizada em 1,2 na direcao North", orientation);
-		sondaIndexer.indexerSonda(sonda, 1, 3, Direction.NORTH.name());
+		Sonda dados = new Sonda("Sonda01", 1, 3, Direction.NORTH);
+		SondaSearch sonda = new SondaSearch("Marte", dados, "A Sonda01 estava inicialmente localizada em 1,2 na direcao North", orientation);
+		sondaIndexer.indexerSonda(sonda);
 	}
 	
 	@Test
 	public void mustIndexerDocumentSonda() throws SearchException {
 		String[] orientation = {"L","M","L","M","L","M","L","M","M"};
-		SondaSearch sonda = new SondaSearch("Marte", "Sonda01", "A Sonda01 estava inicialmente localizada em 1,2 na direcao North", orientation);
-		boolean indexerSonda = sondaIndexer.indexerSonda(sonda, 1, 3, Direction.NORTH.name());
+		Sonda dados = new Sonda("Sonda01", 1, 3, Direction.NORTH);
+		SondaSearch sonda = new SondaSearch("Marte", dados, "A Sonda01 estava inicialmente localizada em 1,2 na direcao North", orientation);		
+		boolean indexerSonda = sondaIndexer.indexerSonda(sonda);
 		Assert.assertTrue(indexerSonda);		
 	}
 	
 	@Test(expected = SearchException.class)
 	public void mustThrowErrorFieldRequiredNullIndexerSonda() throws SearchException {
 		String[] orientation = {"L","M","L","M","L","M","L","M","M"};
-		SondaSearch sonda = new SondaSearch("Marte", "Sonda01", "A Sonda01 estava inicialmente localizada em 1,2 na direcao North", orientation);
-		boolean indexerSonda = sondaIndexer.indexerSonda(sonda, null, null, null);
+		Sonda dados = new Sonda("Sonda01", 1, 2, Direction.EAST);
+		SondaSearch sonda = new SondaSearch(null, dados, "A Sonda01 estava inicialmente localizada em 1,2 na direcao North", orientation);		
+		boolean indexerSonda = sondaIndexer.indexerSonda(sonda);
 		Assert.assertFalse(indexerSonda);
 	}
 	

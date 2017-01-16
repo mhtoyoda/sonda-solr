@@ -8,6 +8,8 @@ import org.apache.solr.client.solrj.beans.Field;
 import org.apache.solr.common.util.DateUtil;
 import org.springframework.data.annotation.Id;
 
+import br.com.toyoda.elo7.model.Sonda;
+
 public class SondaSearch implements Serializable {
 
 	/**
@@ -44,12 +46,15 @@ public class SondaSearch implements Serializable {
 	private String dateAction;
 	
 	public SondaSearch(){}
-
-	public SondaSearch(String planalto, String sonda, String positionCurrent, String[] orientation) {
+		
+	public SondaSearch(String planalto, Sonda sonda, String positionCurrent, String[] orientation) {
 		this.id = new Random().nextLong();
 		this.planalto = planalto;
-		this.sonda = sonda;
+		this.sonda = sonda.getIdentificacao();
 		this.positionCurrent = positionCurrent;
+		this.coordinateX = sonda.getCoordinateX();
+		this.coordinateY = sonda.getCoordinateY();
+		this.direction = sonda.getDirection().name();
 		this.orientation = orientation;
 		this.dateAction = DateUtil.getThreadLocalDateFormat().format(new Date());
 	}
@@ -74,24 +79,12 @@ public class SondaSearch implements Serializable {
 		return coordinateX;
 	}
 
-	public void setCoordinateX(Integer coordinateX) {
-		this.coordinateX = coordinateX;
-	}
-
 	public Integer getCoordinateY() {
 		return coordinateY;
 	}
 
-	public void setCoordinateY(Integer coordinateY) {
-		this.coordinateY = coordinateY;
-	}
-
 	public String getDirection() {
 		return direction;
-	}
-
-	public void setDirection(String direction) {
-		this.direction = direction;
 	}
 
 	public String getDateAction() {

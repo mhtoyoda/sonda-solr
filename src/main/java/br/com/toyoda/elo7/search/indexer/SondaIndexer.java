@@ -24,12 +24,9 @@ public class SondaIndexer {
 	@Autowired
 	private SondaSolrRepository sondaSolrRepository;
 
-	public boolean indexerSonda(SondaSearch dados, Integer coordinateX, Integer coordinateY, String direction)
+	public boolean indexerSonda(SondaSearch dados)
 			throws SearchException {
-		try {
-			dados.setCoordinateX(coordinateX);
-			dados.setCoordinateY(coordinateY);
-			dados.setDirection(direction);
+		try {			
 			sondaSolrRepository.save(dados);
 		} catch (Exception e) {
 			throw new SearchException("Error ao Indexar [" + dados.getPositionCurrent() + "] - " + e.getMessage());
@@ -80,4 +77,11 @@ public class SondaIndexer {
 		return sondaSearchResult;
 	}
 
+	public void indexaFullList(List<SondaSearch> list) throws SearchException{
+		try{
+			sondaSolrRepository.save(list);
+		}catch (Exception e) {
+			throw new SearchException(e.getMessage());
+		}
+	}
 }
