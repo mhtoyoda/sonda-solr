@@ -39,7 +39,7 @@ public class SearchController {
 	}
 
 	private void getFacetDirection(Model model) {
-		SondaSearchResult facetResult = sondaIndexer.findSondaDirectionFacet(getDirections(), new PageRequest(0, 10));
+		SondaSearchResult facetResult = sondaIndexer.findSondaDirectionFacet(getDirections(), new PageRequest(0, Integer.MAX_VALUE));
 		model.addAttribute("directions", facetResult.getFacetMap());
 	}
 }

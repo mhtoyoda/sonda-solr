@@ -18,7 +18,7 @@
 		</div>		
 		<div th:if="${directions.size() > 0}" class="form-group row">
 			<fieldset class="form-group">
-				<legend>Sondas Por Direção - (Facet)</legend>
+				<legend>Sondas Por Direção Final - (Facet)</legend>
 				<div class="col-sm-12">						
 					<div class="col-sm-3" th:each="direction: ${directions}">
 						<a href="#" class="linkDirection" th:href="@{/service/direction/{name} (name = ${direction.key})}" th:text="${direction.value + ' - ' + direction.key}"></a>					 
@@ -68,10 +68,10 @@
    						if(response.results.length > 0){
    							var $tr = '';
    							var data = response.results;
-   							var html = '<table class="table"><thead><tr><th>Planalto</th><th>Sonda</th><th>Posição Final (X - Y)</th></tr></thead><tbody>';
+   							var html = '<table class="table"><thead><tr><th>Planalto</th><th>Sonda</th><th>Posição Final (X - Y - D)</th></tr></thead><tbody>';
    							
    							$.each(data, function(i, item) {
-   						        $tr += '<tr><td>'+item.planalto+'</td><td>'+item.sonda+'</td><td>'+item.coordinateX+ ' - '+item.coordinateY+'</td></tr>';
+   						        $tr += '<tr><td>'+item.planalto+'</td><td>'+item.sonda+'</td><td>'+item.coordinateX+ ' - '+item.coordinateY+' - '+item.direction+'</td></tr>';
    						    });
    							html += $tr;
    							html += '</tbody></table>';
@@ -97,10 +97,10 @@
        						if(response.results.length > 0){
        							var $tr = '';
        							var data = response.results;
-       							var html = '<table class="table"><thead><tr><th>Planalto</th><th>Sonda</th><th>Posição Final (X - Y)</th><th>Observação</th></tr></thead><tbody>';
+       							var html = '<table class="table"><thead><tr><th>Planalto</th><th>Sonda</th><th>Posição Final (X - Y - D)</th><th>Observação</th></tr></thead><tbody>';
        							
        							$.each(data, function(i, item) {
-       						        $tr += '<tr><td>'+item.planalto+'</td><td>'+item.sonda+'</td><td>'+item.coordinateX+ ' - '+item.coordinateY+'</td><td>'+item.positionCurrent+'</td></tr>';
+       						        $tr += '<tr><td>'+item.planalto+'</td><td>'+item.sonda+'</td><td>'+item.coordinateX+ ' - '+item.coordinateY+' - '+item.direction+'</td><td>'+item.positionCurrent+'</td></tr>';
        						    });
        							html += $tr;
        							html += '</tbody></table>';
