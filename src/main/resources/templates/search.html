@@ -22,7 +22,7 @@
 					<legend>Sondas Por Direção - (Facet)</legend>
 					<div class="col-sm-12">						
 						<div class="col-sm-3" th:each="direction: ${directions}">
-							<a href="#" class="linkDirection" th:href="@{/service/direction/} +${direction.key}" th:text="${direction.value + ' - ' + direction.key}"></a>					 
+							<a href="#" class="linkDirection" th:href="@{/service/direction/{name} (name = ${direction.key})}" th:text="${direction.value + ' - ' + direction.key}"></a>					 
 						</div>													 
 					</div>										  
 				</fieldset>
@@ -40,12 +40,15 @@
     <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
     <script type="text/javascript">
-    	$(document).ready(function(){
+    	function teste(name){
+    		console.log(name);
+    	}
+    	$(document).ready(function(){    		
     		$('#result').css("display", "none");
     		$('.linkDirection').on('click', function(event){    			
     			event.preventDefault();
     			$('.table').empty();
-    			var link = $('.linkDirection').attr('href'); 
+    			var link = $(this).attr('href'); 
     			$.ajax({
     				type:'GET',
     				url: link,
