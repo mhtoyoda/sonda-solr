@@ -99,6 +99,12 @@
   <field name="coordinateX" type="int" indexed="true" required="true" stored="true"/>
   <field name="coordinateY" type="int" indexed="true" required="true" stored="true"/>
   <field name="direction" type="text_general_rev" indexed="true" required="true" stored="true"/>
+  <field name="searchField" type="text_general" indexed="true" required="true" stored="true"/>
+  
+  <copyField source="planalto" dest="searchField"/>
+  <copyField source="sonda" dest="searchField"/>
+  <copyField source="direction" dest="searchField"/>
+  <copyField source="*_txt" dest="searchField"/>
   
   <dynamicField name="*_descendent_path" type="descendent_path" indexed="true" stored="true"/>
   <dynamicField name="*_ancestor_path" type="ancestor_path" indexed="true" stored="true"/>
