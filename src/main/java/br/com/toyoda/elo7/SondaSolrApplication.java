@@ -19,6 +19,7 @@ public class SondaSolrApplication {
 		ConfigurableApplicationContext context = SpringApplication.run(SondaSolrApplication.class, args);
 		try {
 			context.getBean(IndexBatch.class).generateDataRandom(1000);
+			log.info("Indexado documentos full!");
 		} catch (BeansException | SearchException e) {
 			log.error("Erro ao indexar full: "+e.getMessage());
 		}
