@@ -25,7 +25,8 @@ public interface SondaSolrRepository extends SolrCrudRepository<SondaSearch, Lon
     @Query(value="*:*", filters="sondaPositionCurrent_txt:(?0)")
 	public Page<SondaSearch> findSondaPositionText(String term, Pageable page);
     
-    @Query(value="sondaPositionCurrent_txt:(?0)")
+    @Query(value="searchField:(?0)")
     @Highlight(prefix = "<term-highlight>", postfix = "</term-highlight>")
     public HighlightPage<SondaSearch> findSondaHighLightTerm(String termo, Pageable pageable);
+    
 }

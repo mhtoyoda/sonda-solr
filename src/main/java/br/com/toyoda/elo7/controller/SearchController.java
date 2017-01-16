@@ -35,7 +35,6 @@ public class SearchController {
 	@RequestMapping(method = RequestMethod.GET, value = "/search")
 	public String index(Model model){				
 		getFacetDirection(model);
-		model.addAttribute("hasMessage", false);
 		return "search";
 	}
 
