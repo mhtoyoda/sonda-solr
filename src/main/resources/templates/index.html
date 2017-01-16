@@ -12,6 +12,9 @@
 <body>
 	<div class="container">
 		<h1>Sonda WEB</h1>
+		<div>
+			<a href="#" th:href="@{/search}">Tela de Consulta</a>  			
+		</div>
 		<div th:if="${hasError}" class="alert alert-danger">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>			
   			<strong>Erro! </strong><span th:text="${message}"></span>

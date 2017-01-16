@@ -19,6 +19,9 @@ public interface SondaSolrRepository extends SolrCrudRepository<SondaSearch, Lon
     @Query(value="*:*", filters="direction:(?0)")
 	public FacetPage<SondaSearch> findSondaDirectionFacet(List<String> directions, Pageable page);
 		
+    @Query(value="*:*", filters="direction:(?0)")
+	public FacetPage<SondaSearch> findSondaDirection(String direction, Pageable page);
+	
     @Query(value="*:*", filters="sondaPositionCurrent_txt:(?0)")
 	public Page<SondaSearch> findSondaPositionText(String term, Pageable page);
     

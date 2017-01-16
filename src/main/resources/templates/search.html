@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="author" content="Marcelo Toyoda" />
+	
+    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+	<title>Sonda - Toyoda</title>
+</head>
+<body>
+	<div class="container">
+		<h1>Sonda WEB - Consulta</h1>
+		<div th:if="${hasMessage}" class="alert alert-info">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>			
+  			<span th:text="${message}"></span>
+		</div>
+		<form id="sondaForm" action="#" th:action="@{/sendIntructions}" method="post" th:object="${sondaAction}">
+			<div th:if="${directions.size() > 0}" class="form-group row">
+				<fieldset class="form-group">
+					<legend>Sondas Por Direção - (Facet)</legend>
+					<div class="col-sm-12">						
+						<div class="col-sm-3" th:each="direction: ${directions}">
+							<a href="#" class="linkDirection" th:href="@{/service/direction/} +${direction.key}" th:text="${direction.value + ' - ' + direction.key}"></a>					 
+						</div>													 
+					</div>										  
+				</fieldset>
+			</div>
+				
+			<div>
+      			<button id="sendInstruction" type="submit" class="btn btn-primary btn-block">Enviar Instruções</button>
+			</div>
+			<br></br>
+			<div id="result">
+			</div>
+		</form>
+	</div>	
+	<script src="http://code.jquery.com/jquery.js"></script>
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$('#result').css("display", "none");
+    		$('.linkDirection').on('click', function(event){    			
+    			event.preventDefault();
+    			$('.table').empty();
+    			var link = $('.linkDirection').attr('href'); 
+    			$.ajax({
+    				type:'GET',
+    				url: link,
+    				dataType: 'json',
+    				success: function(response){
+   						if(response.results.length > 0){
+   							var $tr = '';
+   							var data = response.results;
+   							var html = '<table class="table"><thead><tr><th>Planalto</th><th>Sonda</th><th>Posição Final (X - Y)</th></tr></thead><tbody>';
+   							
+   							$.each(data, function(i, item) {
+   						        $tr += '<tr><td>'+item.planalto+'</td><td>'+item.sonda+'</td><td>'+item.coordinateX+ ' - '+item.coordinateY+'</td></tr>';
+   						    });
+   							html += $tr;
+   							html += '</tbody></table>';
+   							$(html).appendTo('#result');	
+   							$('#result').css("display", "block");
+   						}
+    				}
+   				});
+    		});
+    	});
+    </script>    
+</body>
+</html>

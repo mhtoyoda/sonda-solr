@@ -58,6 +58,14 @@ public class SondaSearchTest {
 	}
 	
 	@Test
+	public void mustReturnDocumentSondaDirectionFinal() throws SearchException {
+		String direction = Direction.NORTH.name();
+		SondaSearchResult sondaSearchResult = sondaIndexer.findSondaDirection(direction, new PageRequest(0, 10));
+		Assert.assertTrue(sondaSearchResult.getResults().size() > 0);
+		Assert.assertTrue(sondaSearchResult.getResults().get(0).getDirection().equalsIgnoreCase(Direction.NORTH.name()));		
+	}
+	
+	@Test
 	public void findTermOnTextPositionSonda(){
 		SondaSearchResult result = sondaIndexer.findSondaPositionText("direcao", new PageRequest(0, 10));
 		Assert.assertTrue(result.getResults().size() > 0);	

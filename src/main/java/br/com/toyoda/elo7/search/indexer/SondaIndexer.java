@@ -2,6 +2,7 @@ package br.com.toyoda.elo7.search.indexer;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,12 +43,21 @@ public class SondaIndexer {
 		sondaSearchResult.setResults(findSondaDirectionFacet.getContent());
 		for (Page<? extends FacetEntry> facet : findSondaDirectionFacet.getAllFacets()) {
 			for (FacetEntry facetEntry : facet.getContent()) {
-				sondaSearchResult.addMapFacet(facetEntry.getValue(), facetEntry.getValueCount());
+				if(directions.contains(StringUtils.upperCase(facetEntry.getValue()))){
+					sondaSearchResult.addMapFacet(facetEntry.getValue(), facetEntry.getValueCount());
+				}				
 			}
 		}
 		return sondaSearchResult;
 	}
-
+	
+	public SondaSearchResult findSondaDirection(String direction, Pageable page) {
+		SondaSearchResult sondaSearchResult = new SondaSearchResult();
+		Page<SondaSearch> results = sondaSolrRepository.findSondaDirection(direction, page);
+		sondaSearchResult.setResults(results.getContent());
+		return sondaSearchResult;
+	}
+	
 	public SondaSearchResult findSondaPositionText(String term, Pageable page) {
 		SondaSearchResult sondaSearchResult = new SondaSearchResult();
 		Page<SondaSearch> results = sondaSolrRepository.findSondaPositionText(term, page);
